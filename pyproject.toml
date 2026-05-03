@@ -1,0 +1,20 @@
+[project]
+name = "openclaw-backup"
+version = "1.0.0"
+description = "Advanced secure backup utility for OpenClaw with Zstd compression and Cloudflare R2 integration."
+authors = [
+    { name = "Alex & Eva", email = "alex@example.com" }
+]
+dependencies = [
+    "boto3>=1.34.0",
+    "python-dotenv>=1.0.0",
+    "rich>=13.7.0",
+    "psutil>=5.9.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

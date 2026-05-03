@@ -1,0 +1,25 @@
+# Python environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.python-version
+
+# Configuration & Secrets
+.env
+.env.backup
+.env.local
+
+# Logs and temporary files
+*.log
+*.tmp
+oc_backup_*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+uv.lock
