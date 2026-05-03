@@ -1,13 +1,13 @@
 # OpenClaw Backup Tool 🛡️🦞
 
-An advanced Python utility for creating secure, high-density backups of your **OpenClaw** installation.
+A Python utility for creating secure backups of your **OpenClaw** installation.
 
-This tool was designed during the OpenClaw 5.2 setup to provide a robust, production-grade backup solution that combines Unix efficiency with a modern CLI experience.
+This tool provides a reliable backup solution that combines standard Unix tools with a modern CLI interface.
 
 ## Key Features ✨
 
-*   **Ultra-High Compression:** Uses a `tar` + `zstd` pipeline with maximum compression level `-19` and multi-threading (`-T0`).
-*   **Military-Grade Security:** Symmetric **AES-256** encryption via `gpg`. Your data remains safe even in public cloud storage.
+*   **Zstd Compression:** Uses a `tar` + `zstd` pipeline with compression level `-19` and multi-threading (`-T0`) to minimize archive size.
+*   **AES-256 Encryption:** Symmetric encryption via `gpg`. Your data remains private even in cloud storage.
 *   **Cloudflare R2 Integration:** Automated upload to S3-compatible Cloudflare R2 storage with support for bucket prefixes (folders).
 *   **Smart Exclusions:** Automatically skips logs, trash, temporary files, and `node_modules` to save space and time.
 *   **Backup Metadata:** Every archive includes a `BACKUP_README.md` containing system info, hardware specs, and versions of OpenClaw/Node.js.
@@ -42,14 +42,20 @@ sudo apt update && sudo apt install zstd gnupg
    ```
    *Fill in your R2 credentials and set your `BACKUP_PASSWORD`.*
 
-2. **Run in interactive mode:**
+2. **Run the utility:**
+   You can run it directly from the project directory:
    ```bash
-   uv run backup.py
+   uv run openclaw-backup
+   ```
+   *Or install it globally to run from anywhere:*
+   ```bash
+   uv tool install .
+   openclaw-backup
    ```
 
 3. **Run automated backup with cloud upload:**
    ```bash
-   uv run backup.py --auto --upload
+   uv run openclaw-backup --auto --upload
    ```
 
 ## Automation (Cron) ⏱️
@@ -58,7 +64,7 @@ To automatically run the backup every day at 2:00 AM, add this to your crontab (
 
 ```bash
 # Run OpenClaw backup daily at 2:00 AM
-0 2 * * * cd /path/to/backup-openclaw && /path/to/uv run backup.py --auto --upload >> backup.log 2>&1
+0 2 * * * cd /path/to/backup-openclaw && /path/to/uv run openclaw-backup --auto --upload >> backup.log 2>&1
 ```
 *(Make sure to replace `/path/to/` with your actual absolute paths. You can find `uv` path via `which uv`)*
 

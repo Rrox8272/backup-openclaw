@@ -41,6 +41,9 @@ EXCLUDE_POLICIES = [
     ".openclaw/node_modules/*",
     "*.log",
     "*.tmp",
+    "*.deleted.*",
+    "*.reset.*",
+    "*.checkpoint.*",
     "*.tar.zst",
     "*.tar.gz",
     "*.zip",
@@ -226,7 +229,7 @@ class OpenClawBackup:
         if self.temp_dir.exists():
             shutil.rmtree(self.temp_dir)
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="OpenClaw Backup Tool")
     parser.add_argument("--auto", action="store_true", help="Non-interactive mode")
     parser.add_argument("--upload", action="store_true", help="Force upload to R2")
@@ -245,3 +248,6 @@ if __name__ == "__main__":
         CONSOLE.print("[bold red]Critical Error:[/bold red]", highlight=False)
         CONSOLE.print(str(e), style="red", highlight=False)
         sys.exit(1)
+
+if __name__ == "__main__":
+    main()
